@@ -1,10 +1,10 @@
 import json
-
-import mlflow
-import tempfile
 import os
-import wandb
+import tempfile
+
 import hydra
+import mlflow
+import wandb
 from omegaconf import DictConfig
 
 _steps = [
@@ -16,12 +16,12 @@ _steps = [
     # NOTE: We do not include this in the steps so it is not run by mistake.
     # You first need to promote a model export to "prod" before you can run this,
     # then you need to run this step explicitly
-#    "test_regression_model"
+    # "test_regression_model",
 ]
 
 
 # This automatically reads in the configuration
-@hydra.main(version_base=None, config_name='config', config_path='.')
+@hydra.main(version_base=None, config_name="config", config_path=".")
 def go(config: DictConfig):
 
     # Setup the wandb experiment. All runs will be grouped under this name
@@ -29,7 +29,7 @@ def go(config: DictConfig):
     os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
 
     # Steps to execute
-    steps_par = config['main']['steps']
+    steps_par = config["main"]["steps"]
     active_steps = steps_par.split(",") if steps_par != "all" else _steps
 
     # Move to a temporary directory
@@ -40,12 +40,12 @@ def go(config: DictConfig):
             _ = mlflow.run(
                 f"{config['main']['components_repository']}/get_data",
                 "main",
-                env_manager="conda",
+                env_manager="local",  # use the Udacity workspace env
                 parameters={
                     "sample": config["etl"]["sample"],
                     "artifact_name": "sample.csv",
                     "artifact_type": "raw_data",
-                    "artifact_description": "Raw file as downloaded"
+                    "artifact_description": "Raw file as downloaded",
                 },
             )
 
@@ -74,23 +74,18 @@ def go(config: DictConfig):
             with open(rf_config, "w+") as fp:
                 json.dump(dict(config["modeling"]["random_forest"].items()), fp)  # DO NOT TOUCH
 
-            # NOTE: use the rf_config we just created as the rf_config parameter for the train_random_forest
-            # step
-
             ##################
             # Implement here #
             ##################
-
             pass
 
         if "test_regression_model" in active_steps:
-
             ##################
             # Implement here #
             ##################
-
             pass
 
 
 if __name__ == "__main__":
     go()
+
