@@ -240,3 +240,15 @@ The full pipeline can be executed end-to-end with:
 
 ```bash
 mlflow run . --env-manager=local
+
+---
+
+## 🔗 Project Links
+
+- **GitHub Repository:**  
+  https://github.com/Jmors69/Project-Build-an-ML-Pipeline-Starter
+
+- **Weights & Biases Project (Public):**  
+  https://wandb.ai/jmors69-western-governors-university/nyc_airbnb
+
+---
