@@ -24,6 +24,15 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+# ===== ML Pipeline generated files =====
+rf_config.json
+mlruns/
+wandb/
+.wandb/
+
+# Generated data artifacts
+*.csv
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
