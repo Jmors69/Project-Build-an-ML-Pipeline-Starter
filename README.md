@@ -179,3 +179,64 @@ Please, make sure all steps are using **the same** python version and that you h
 ## License
 
 [License](LICENSE.txt)
+
+---
+
+## Project Implementation Summary
+
+This repository contains my completed implementation of the **Build an ML Pipeline for Short-Term Rental Prices in NYC** project.
+
+The goal of this project is to build a fully reproducible, end-to-end machine learning pipeline that predicts short-term rental prices in New York City using Airbnb listing data. The pipeline is designed to be rerun automatically as new data becomes available.
+
+---
+
+## Implemented Pipeline Steps
+
+### 1. Download
+- Downloads the raw Airbnb dataset
+- Logs the dataset to **Weights & Biases** as a versioned artifact  
+- Artifact name: `raw_data/sample.csv`
+
+### 2. Basic Cleaning
+- Removes listings with prices outside a configurable range
+- Parses the `last_review` column into datetime format
+- Outputs a cleaned dataset
+- Logs the cleaned dataset as a new **Weights & Biases** artifact  
+- Artifact name: `clean_data/clean_sample.csv`
+
+### 3. Data Validation
+- Performs schema and data-quality checks
+- Ensures consistency between raw and cleaned datasets
+
+### 4. Data Split
+- Splits the cleaned data into training, validation, and test sets
+- Ensures reproducibility via fixed random seeds
+
+### 5. Model Training
+- Trains a Random Forest regression model
+- Hyperparameters are driven by configuration files
+- Model artifacts are tracked in **Weights & Biases**
+
+### 6. Model Evaluation
+- Evaluates model performance using regression metrics
+- Results are logged for comparison across runs
+
+---
+
+## Experiment Tracking
+
+- **MLflow** is used for pipeline orchestration and reproducibility
+- **Weights & Biases** is used for:
+  - Experiment tracking
+  - Dataset versioning
+  - Artifact lineage
+- Each pipeline step is fully traceable from raw data to final model
+
+---
+
+## Reproducibility
+
+The full pipeline can be executed end-to-end with:
+
+```bash
+mlflow run . --env-manager=local
