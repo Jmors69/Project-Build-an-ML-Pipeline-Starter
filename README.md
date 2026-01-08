@@ -1,10 +1,63 @@
-# Build an ML Pipeline for Short-Term Rental Prices in NYC
-You are working for a property management company renting rooms and properties for short periods of 
-time on various rental platforms. You need to estimate the typical price for a given property based 
-on the price of similar properties. Your company receives new data in bulk every week. The model needs 
-to be retrained with the same cadence, necessitating an end-to-end pipeline that can be reused.
+# NYC Airbnb Price Prediction – ML Pipeline
 
-In this project you will build such a pipeline.
+## Project Links
+
+- **GitHub Repository**  
+  https://github.com/Jmors69/Project-Build-an-ML-Pipeline-Starter
+
+- **Weights & Biases Project (Public)**  
+  https://wandb.ai/Jmors69/nyc_airbnb
+
+
+## Project Overview
+This project implements a fully reproducible, end-to-end machine learning pipeline for predicting short-term rental prices in New York City. The pipeline is built using **MLflow Projects**, **Hydra configuration**, and **Weights & Biases (W&B)** for experiment tracking and artifact management.
+
+The goal of this project is to demonstrate how a production-ready ML pipeline can be developed, tested, versioned, and released in a structured and repeatable way.
+
+---
+
+## What I Implemented
+The following components were implemented and verified end-to-end:
+
+- A complete MLflow pipeline with modular steps
+- Data ingestion and artifact versioning using W&B
+- A **basic data cleaning step** with:
+  - Price range filtering
+  - Date conversion
+  - Geographic boundary validation (latitude/longitude)
+- Automated **data validation tests**
+  - Row count validation
+  - Price range validation
+- Dataset splitting into train, validation, and test sets
+- Random Forest model training
+- Hyperparameter optimization
+- Model selection and promotion using W&B artifact tags
+- Pipeline visualization and GitHub release versioning
+
+---
+
+## Tools & Technologies Used
+- Python 3.10
+- MLflow
+- Weights & Biases (W&B)
+- Hydra
+- scikit-learn
+- pandas
+- GitHub Releases
+- Windows Subsystem for Linux (WSL – Ubuntu)
+
+---
+
+## Local Environment Setup (WSL – No Udacity Workspace Used)
+
+This project was completed locally using **Windows Subsystem for Linux (WSL)** instead of the Udacity workspace.
+
+### 1. Install WSL and Ubuntu
+From PowerShell (run as Administrator):
+
+```powershell
+wsl --install
+
 
 ## Table of contents
 
@@ -179,76 +232,5 @@ Please, make sure all steps are using **the same** python version and that you h
 ## License
 
 [License](LICENSE.txt)
-
----
-
-## Project Implementation Summary
-
-This repository contains my completed implementation of the **Build an ML Pipeline for Short-Term Rental Prices in NYC** project.
-
-The goal of this project is to build a fully reproducible, end-to-end machine learning pipeline that predicts short-term rental prices in New York City using Airbnb listing data. The pipeline is designed to be rerun automatically as new data becomes available.
-
----
-
-## Implemented Pipeline Steps
-
-### 1. Download
-- Downloads the raw Airbnb dataset
-- Logs the dataset to **Weights & Biases** as a versioned artifact  
-- Artifact name: `raw_data/sample.csv`
-
-### 2. Basic Cleaning
-- Removes listings with prices outside a configurable range
-- Parses the `last_review` column into datetime format
-- Outputs a cleaned dataset
-- Logs the cleaned dataset as a new **Weights & Biases** artifact  
-- Artifact name: `clean_data/clean_sample.csv`
-
-### 3. Data Validation
-- Performs schema and data-quality checks
-- Ensures consistency between raw and cleaned datasets
-
-### 4. Data Split
-- Splits the cleaned data into training, validation, and test sets
-- Ensures reproducibility via fixed random seeds
-
-### 5. Model Training
-- Trains a Random Forest regression model
-- Hyperparameters are driven by configuration files
-- Model artifacts are tracked in **Weights & Biases**
-
-### 6. Model Evaluation
-- Evaluates model performance using regression metrics
-- Results are logged for comparison across runs
-
----
-
-## Experiment Tracking
-
-- **MLflow** is used for pipeline orchestration and reproducibility
-- **Weights & Biases** is used for:
-  - Experiment tracking
-  - Dataset versioning
-  - Artifact lineage
-- Each pipeline step is fully traceable from raw data to final model
-
----
-
-## Reproducibility
-
-The full pipeline can be executed end-to-end with:
-
-```bash
-mlflow run . --env-manager=local
-
----
-
-## 🔗 Project Links
-
-- **GitHub Repository:**  
-  https://github.com/Jmors69/Project-Build-an-ML-Pipeline-Starter
-
-- **Weights & Biases Project (Public):**  
-  https://wandb.ai/jmors69-western-governors-university/nyc_airbnb
 
 ---
