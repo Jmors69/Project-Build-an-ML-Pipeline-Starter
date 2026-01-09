@@ -38,12 +38,12 @@ def go(args):
 
      
     # Add longitude and latitude filter to allow test_proper_boundaries to pass
-    
-idx = (
-    df["longitude"].between(-74.25, -73.50)
-    & df["latitude"].between(40.49, 40.92)
-)
-df = df[idx].copy()
+
+    idx = (
+        df["longitude"].between(-74.25, -73.50)
+        & df["latitude"].between(40.49, 40.92)
+    )
+    df = df[idx].copy()
 
 
     # Save the cleaned data
@@ -51,9 +51,9 @@ df = df[idx].copy()
 
     # log the new data.
     artifact = wandb.Artifact(
-     args.output_artifact,
-     type=args.output_type,
-     description=args.output_description,
+    args.output_artifact,
+    type=args.output_type,
+    description=args.output_description,
  )
     artifact.add_file("clean_sample.csv")
     run.log_artifact(artifact)
